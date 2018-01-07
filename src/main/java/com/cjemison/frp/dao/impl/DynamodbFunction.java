@@ -79,7 +79,8 @@ public class DynamodbFunction {
                                final QuerySpecFunction querySpecFunction,
                                final TableFunction tableFunction,
                                final IndexFunction indexFunction) {
-    LOGGER.debug("id: {} columnName: {} tableName: {}", id, columnName, tableName);
+    LOGGER.debug("id: {} columnName: {} indexName: {} tableName: {}", id, columnName,
+          indexName, tableName);
 
     return Flux.create(itemFluxSink -> {
       try {
