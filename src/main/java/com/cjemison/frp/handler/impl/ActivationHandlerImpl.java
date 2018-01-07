@@ -22,7 +22,6 @@ import java.util.Base64;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -117,10 +116,8 @@ public class ActivationHandlerImpl implements ActivationHandler {
             return Mono.just(activationDO);
           })
           .flatMap(activationDO -> ServerResponse.created(serverRequest.uri())
-                .syncBody(activationDO)).onErrorResume(throwable -> {
-            final String transcactionId = UUID.randomUUID().toString();
-            return ServerResponse.badRequest().build();
-          });
+                .syncBody(activationDO)).onErrorResume(throwable -> ServerResponse.badRequest()
+                .build());
   }
 
   private void cache(final ActivationDO activationDO) {
